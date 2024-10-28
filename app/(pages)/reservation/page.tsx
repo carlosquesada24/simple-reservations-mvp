@@ -1,8 +1,34 @@
+"use client";
 import DateSelection from "./(components)/DateSelection/DateSelection";
 import TimeSelection from "./(components)/TimeSelection/TimeSelection";
 import UserInformation from "./(components)/UserInformation/UserInformation";
 
+import { useForm } from "@/app/(hooks)/useForm";
+
+interface ReservationFormValues {
+  reservationDate: string;
+  reservationTime: string;
+  email: string;
+  phoneNumber: string;
+  name: string;
+}
+
+const reservationFormEmptyState: ReservationFormValues = {
+  reservationDate: "",
+  reservationTime: "",
+  email: "",
+  phoneNumber: "",
+  name: "",
+};
+
 export default function ReservationPage() {
+  const {
+    values: formValues,
+    errors,
+    handleInputChange,
+    validateField,
+  } = useForm(reservationFormEmptyState, {});
+
   return (
     <main className="">
       <h1 className="text-2xl dark:text-white">Página de reservación</h1>
