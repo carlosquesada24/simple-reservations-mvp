@@ -4,6 +4,8 @@ import DateSelection from "./(components)/DateSelection/DateSelection";
 import TimeSelection from "./(components)/TimeSelection/TimeSelection";
 import UserInformation from "./(components)/UserInformation/UserInformation";
 
+import { Button } from "flowbite-react";
+
 import { useForm } from "@/app/(hooks)/useForm";
 
 interface ReservationFormValues {
@@ -42,6 +44,9 @@ export default function ReservationPage() {
       RESERVATION_FORM_STEPS.USER_INFORMATION,
     );
 
+  const firstFormStep = RESERVATION_FORM_STEPS.DATE_SELECTION;
+  const lastFormStep = RESERVATION_FORM_STEPS.USER_INFORMATION;
+
   return (
     <main className="">
       <h1 className="text-2xl dark:text-white">Página de reservación</h1>
@@ -50,27 +55,32 @@ export default function ReservationPage() {
       {/* FORM */}
 
       <form>
-        {/* STEPPER */}
-
         {/* <Stepper /> */}
 
         {/* STEP 1 */}
-        <DateSelection />
-        <hr />
+        {currentFormStep === RESERVATION_FORM_STEPS.DATE_SELECTION && (
+          <DateSelection />
+        )}
 
         {/* STEP 2 */}
-        <TimeSelection />
-        <hr />
-        {/* STEP 3 */}
-        <UserInformation />
-        <hr />
+        {currentFormStep === RESERVATION_FORM_STEPS.HOUR_SELECTION && (
+          <TimeSelection />
+        )}
 
-        <button
-          type="submit"
-          className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
-        >
-          Reservar
-        </button>
+        {/* STEP 3 */}
+        {currentFormStep === RESERVATION_FORM_STEPS.USER_INFORMATION && (
+          <UserInformation />
+        )}
+
+        {currentFormStep !== firstFormStep && (
+          <Button onClick={backToPreviousFormStep}>Anterior</Button>
+        )}
+
+        {currentFormStep !== lastFormStep && (
+          <Button onClick={advanceToNextFormStep}>Siguiente</Button>
+        )}
+
+        {currentFormStep === lastFormStep && <Button>Reservar</Button>}
       </form>
 
       {/* STEPPER */}
