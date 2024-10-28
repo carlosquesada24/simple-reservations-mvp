@@ -1,4 +1,3 @@
-import { Card, Datepicker } from "flowbite-react";
 import DateSelection from "./(components)/DateSelection/DateSelection";
 import TimeSelection from "./(components)/TimeSelection/TimeSelection";
 import UserInformation from "./(components)/UserInformation/UserInformation";
@@ -12,6 +11,10 @@ export default function ReservationPage() {
       {/* FORM */}
 
       <form>
+        {/* STEPPER */}
+
+        {/* <Stepper /> */}
+
         {/* STEP 1 */}
         <DateSelection />
         <hr />
