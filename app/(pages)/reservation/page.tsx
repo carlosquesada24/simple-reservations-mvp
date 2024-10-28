@@ -1,4 +1,5 @@
 "use client";
+import useFormSteps from "@/app/(hooks)/useFormSteps";
 import DateSelection from "./(components)/DateSelection/DateSelection";
 import TimeSelection from "./(components)/TimeSelection/TimeSelection";
 import UserInformation from "./(components)/UserInformation/UserInformation";
@@ -21,6 +22,12 @@ const reservationFormEmptyState: ReservationFormValues = {
   name: "",
 };
 
+const RESERVATION_FORM_STEPS = {
+  DATE_SELECTION: 1,
+  HOUR_SELECTION: 2,
+  USER_INFORMATION: 3,
+};
+
 export default function ReservationPage() {
   const {
     values: formValues,
@@ -28,6 +35,12 @@ export default function ReservationPage() {
     handleInputChange,
     validateField,
   } = useForm(reservationFormEmptyState, {});
+
+  const { currentFormStep, advanceToNextFormStep, backToPreviousFormStep } =
+    useFormSteps(
+      RESERVATION_FORM_STEPS.DATE_SELECTION,
+      RESERVATION_FORM_STEPS.USER_INFORMATION,
+    );
 
   return (
     <main className="">
