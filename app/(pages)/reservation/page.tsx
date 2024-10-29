@@ -8,6 +8,8 @@ import { Button } from "flowbite-react";
 
 import { useForm } from "@/app/(hooks)/useForm";
 
+import { availabilityByReservationDate } from "@/app/(data)/(reservations)";
+
 interface ReservationFormValues {
   reservationDate: string;
   reservationTime: string;
@@ -47,6 +49,9 @@ export default function ReservationPage() {
   const firstFormStep = RESERVATION_FORM_STEPS.DATE_SELECTION;
   const lastFormStep = RESERVATION_FORM_STEPS.USER_INFORMATION;
 
+  const availableHoursList: string[] =
+    availabilityByReservationDate["2024-10-29"];
+
   return (
     <main className="">
       <h1 className="text-2xl dark:text-white">Página de reservación</h1>
@@ -64,7 +69,7 @@ export default function ReservationPage() {
 
         {/* STEP 2 */}
         {currentFormStep === RESERVATION_FORM_STEPS.HOUR_SELECTION && (
-          <TimeSelection />
+          <TimeSelection availableHoursList={availableHoursList} />
         )}
 
         {/* STEP 3 */}
