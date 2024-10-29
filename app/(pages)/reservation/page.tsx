@@ -9,6 +9,7 @@ import { Button } from "flowbite-react";
 import { useForm } from "@/app/(hooks)/useForm";
 
 import { availabilityByReservationDate } from "@/app/(data)/(reservations)";
+import { convertToDateString, getTodaysDate } from "@/app/(helpers)/date";
 
 interface ReservationFormValues {
   reservationDate: string;
@@ -19,7 +20,7 @@ interface ReservationFormValues {
 }
 
 const reservationFormEmptyState: ReservationFormValues = {
-  reservationDate: "",
+  reservationDate: convertToDateString(getTodaysDate()),
   reservationTime: "",
   email: "",
   phoneNumber: "",
@@ -64,7 +65,10 @@ export default function ReservationPage() {
 
         {/* STEP 1 */}
         {currentFormStep === RESERVATION_FORM_STEPS.DATE_SELECTION && (
-          <DateSelection handleDateChange={handleInputChange} />
+          <DateSelection
+            reservationDate={formValues.reservationDate}
+            handleDateChange={handleInputChange}
+          />
         )}
 
         {/* STEP 2 */}
