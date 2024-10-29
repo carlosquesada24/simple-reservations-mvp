@@ -40,7 +40,7 @@ export default function ReservationPage() {
     handleInputChange,
     validateField,
   } = useForm(reservationFormEmptyState, {});
-
+  console.log({ formValues });
   const { currentFormStep, advanceToNextFormStep, backToPreviousFormStep } =
     useFormSteps(
       RESERVATION_FORM_STEPS.DATE_SELECTION,
@@ -73,12 +73,21 @@ export default function ReservationPage() {
 
         {/* STEP 2 */}
         {currentFormStep === RESERVATION_FORM_STEPS.HOUR_SELECTION && (
-          <TimeSelection availableHoursList={availableHoursList} />
+          <TimeSelection
+            availableHoursList={availableHoursList}
+            selectedTime={formValues.reservationTime}
+            handleSelectTime={handleInputChange}
+          />
         )}
 
         {/* STEP 3 */}
         {currentFormStep === RESERVATION_FORM_STEPS.USER_INFORMATION && (
-          <UserInformation />
+          <UserInformation
+            email={formValues.email}
+            phoneNumber={formValues.phoneNumber}
+            name={formValues.name}
+            handleInputChange={handleInputChange}
+          />
         )}
 
         {currentFormStep !== firstFormStep && (

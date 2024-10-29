@@ -1,7 +1,19 @@
 import { Checkbox, Label, TextInput } from "flowbite-react";
 import React from "react";
 
-const UserInformation = () => {
+interface UserInformationProps {
+  email: string;
+  phoneNumber: string;
+  name: string;
+  handleInputChange: Function;
+}
+
+const UserInformation = ({
+  email,
+  phoneNumber,
+  name,
+  handleInputChange,
+}: UserInformationProps) => {
   return (
     <>
       <div>
@@ -9,10 +21,15 @@ const UserInformation = () => {
           <Label htmlFor="email1" value="Correo electrónico" />
         </div>
         <TextInput
-          id="email1"
+          id="email"
+          name="email"
           type="email"
           placeholder="name@flowbite.com"
           required
+          value={email}
+          onChange={(event) => {
+            handleInputChange("email", event.target.value);
+          }}
         />
       </div>
       <div>
@@ -24,6 +41,10 @@ const UserInformation = () => {
           type="text"
           placeholder="88888888"
           required
+          value={phoneNumber}
+          onChange={(event) => {
+            handleInputChange("phoneNumber", event.target.value);
+          }}
         />
       </div>
       <div>
@@ -32,9 +53,14 @@ const UserInformation = () => {
         </div>
         <TextInput
           id="name"
+          name="name"
           type="text"
           placeholder="Carlos Quesada"
           required
+          value={name}
+          onChange={(event) => {
+            handleInputChange("name", event.target.value);
+          }}
         />
       </div>
     </>
