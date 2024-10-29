@@ -50,7 +50,7 @@ export default function ReservationPage() {
   const lastFormStep = RESERVATION_FORM_STEPS.USER_INFORMATION;
 
   const availableHoursList: string[] =
-    availabilityByReservationDate["2024-10-29"];
+    availabilityByReservationDate[formValues.reservationDate];
 
   return (
     <main className="">
@@ -64,7 +64,7 @@ export default function ReservationPage() {
 
         {/* STEP 1 */}
         {currentFormStep === RESERVATION_FORM_STEPS.DATE_SELECTION && (
-          <DateSelection />
+          <DateSelection handleDateChange={handleInputChange} />
         )}
 
         {/* STEP 2 */}
