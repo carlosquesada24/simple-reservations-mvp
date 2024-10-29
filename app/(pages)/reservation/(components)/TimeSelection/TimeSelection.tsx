@@ -3,9 +3,13 @@ import React from "react";
 
 interface TimeSelectionProps {
   availableHoursList: string[];
+  handleSelectTime: Function;
 }
 
-const TimeSelection = ({ availableHoursList }: TimeSelectionProps) => {
+const TimeSelection = ({
+  availableHoursList,
+  handleSelectTime,
+}: TimeSelectionProps) => {
   const isAvailableHoursListValid =
     Array.isArray(availableHoursList) && availableHoursList.length > 0;
 
@@ -13,7 +17,11 @@ const TimeSelection = ({ availableHoursList }: TimeSelectionProps) => {
     <>
       {isAvailableHoursListValid &&
         availableHoursList.map((hour) => (
-          <Card key={hour} className="max-w-sm">
+          <Card
+            key={hour}
+            className="max-w-sm"
+            onClick={() => handleSelectTime("reservationTime", hour)}
+          >
             <p className="text-center font-normal text-gray-700 dark:text-gray-400">
               {hour}
             </p>
