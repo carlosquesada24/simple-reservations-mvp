@@ -3,13 +3,19 @@ import { Datepicker } from "flowbite-react";
 import { convertToDateString, getTodaysDate } from "@/app/(helpers)/date";
 
 interface DateSelectionProps {
+  reservationDate: string;
   handleDateChange: Function;
 }
 
-const DateSelection = ({ handleDateChange }: DateSelectionProps) => {
+const DateSelection = ({
+  reservationDate,
+  handleDateChange,
+}: DateSelectionProps) => {
   return (
     <Datepicker
       minDate={getTodaysDate()}
+      name="reservationDate"
+      value={reservationDate}
       onSelectedDateChanged={(selectedDate: Date) => {
         handleDateChange("reservationDate", convertToDateString(selectedDate));
       }}
