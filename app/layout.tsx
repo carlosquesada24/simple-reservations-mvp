@@ -20,7 +20,9 @@ export default function RootLayout({
       <head>
         <ThemeModeScript />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} p-2 dark:bg-gray-800`}>
+        {children}
+      </body>
     </html>
   );
 }
