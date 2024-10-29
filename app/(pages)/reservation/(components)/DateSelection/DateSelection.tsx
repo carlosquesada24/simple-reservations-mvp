@@ -1,8 +1,19 @@
-import { Datepicker } from "flowbite-react";
 import React from "react";
+import { Datepicker } from "flowbite-react";
 
-const DateSelection = () => {
-  return <Datepicker />;
+interface DateSelectionProps {
+  handleDateChange: Function;
+}
+
+const DateSelection = ({ handleDateChange }: DateSelectionProps) => {
+  return (
+    <Datepicker
+      onSelectedDateChanged={(selectedDate: Date) => {
+        console.log({ selectedDate });
+        handleDateChange("reservationDate", selectedDate);
+      }}
+    />
+  );
 };
 
 export default DateSelection;
