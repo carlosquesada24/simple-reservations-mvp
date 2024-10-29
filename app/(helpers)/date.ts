@@ -1,4 +1,5 @@
-export const getTodaysDate = () => new Date().toISOString().split("T")[0];
+export const getTodaysDate = () => new Date();
+// export const getTodaysDate = () => new Date().toISOString().split("T")[0];
 
 // YYYY-MM-DD
 export const convertToDateString = (date: Date): string => {
