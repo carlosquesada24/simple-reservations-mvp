@@ -1,5 +1,6 @@
 import React from "react";
 import { Datepicker } from "flowbite-react";
+import { convertToDateString } from "@/app/(helpers)/date";
 
 interface DateSelectionProps {
   handleDateChange: Function;
@@ -9,8 +10,7 @@ const DateSelection = ({ handleDateChange }: DateSelectionProps) => {
   return (
     <Datepicker
       onSelectedDateChanged={(selectedDate: Date) => {
-        console.log({ selectedDate });
-        handleDateChange("reservationDate", selectedDate);
+        handleDateChange("reservationDate", convertToDateString(selectedDate));
       }}
     />
   );
