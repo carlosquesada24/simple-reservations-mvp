@@ -8,7 +8,8 @@ interface TimeSelectionProps {
 const TimeSelection = ({ availableHoursList }: TimeSelectionProps) => {
   return (
     <>
-      {availableHoursList.length > 0 &&
+      {Array.isArray(availableHoursList) &&
+        availableHoursList.length > 0 &&
         availableHoursList.map((hour) => (
           <Card key={hour} className="max-w-sm">
             <p className="text-center font-normal text-gray-700 dark:text-gray-400">
