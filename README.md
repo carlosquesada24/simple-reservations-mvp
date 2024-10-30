@@ -11,3 +11,19 @@ git clone https://carlosquesada24:GITHUB_ACCESS_TOKEN@github.com/carlosquesada24
 npm install
 
 npm run dev
+
+# Features working
+
+## Create reservations ⌚
+
+- Reservation Form basic UI structure ✅
+- Reservation Form Logic ✅
+- Reservation Form UI ⌚
+
+[Create reservations (1, 2)](<../../../../Desktop/Reservations MVP - Reservation form logic flow working.webm>)
+
+Branches updated locally and remotely
+
+## Show all reservations (barber) ⌚
+
+## Show all reservations (client) ⌚
