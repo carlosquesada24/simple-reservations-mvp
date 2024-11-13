@@ -8,12 +8,28 @@ export const availabilityByReservationDate: AvailabilityByReservationDate = {
     '2024-11-14': ['10:00', '11:00', '13:00'],
 };
 
+export interface ReservationSupabaseRequest {
+    id: string;
+    created_at: string;
+    estimatedServiceDurationTimeForBarberInMinutes: number;
+    estimatedServiceDurationTimeForClientInMinutes: number;
+    reservationDate: string;
+    reservationDateTime: string;
+    reservationTime: string;
+    salePrice: number;
+    Users: {
+        name: string;
+        email: string;
+        phoneNumber: string;
+    }
+}
+
 export interface Reservation {
     id: string;
     salePrice: string;
     durationInMinutes: number;
-    reservationDate: string;
-    reservationTime: string;
+    reservationDateTime: string; // day date month
+    estimatedServiceDurationTimeForClientInMinutes: number;
     client: {
         id: string;
         name: string;
