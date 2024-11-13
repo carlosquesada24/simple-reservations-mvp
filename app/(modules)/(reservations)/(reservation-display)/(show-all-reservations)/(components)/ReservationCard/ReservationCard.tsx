@@ -83,7 +83,7 @@ const ReservationCardBarberView = ({ reservation }: ReservationCardProps) => {
 };
 
 const ReservationCard = ({ reservation }: ReservationCardProps) => {
-  const isBarberUser = false;
+  const isBarberUser = true;
   const isClientUser = !isBarberUser;
 
   return isBarberUser ? (

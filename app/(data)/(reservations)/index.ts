@@ -22,7 +22,7 @@ export interface Reservation {
     }
 }
 
-export const reservationsList: Reservation[] = [
+export const clientReservationsList: Reservation[] = [
     {
         id: "51f03f51-0af6-49bf-af0c-bdf356d56664",
         salePrice: "CRC 3,500.00",
@@ -47,6 +47,36 @@ export const reservationsList: Reservation[] = [
             name: "Carlos",
             email: "carlos.test@gmail.com",
             phoneNumber: "84878116",
+        }
+    },
+];
+
+
+export const barberReservationsList: Reservation[] = [
+    {
+        id: "51f03f51-0af6-49bf-af0c-bdf356d56664",
+        salePrice: "CRC 3,500.00",
+        durationInMinutes: 45,
+        reservationDate: "Viernes 15 de noviembre",
+        reservationTime: "10:00 a.m.",
+        client: {
+            id: "e9248f50-f6bd-4325-94e9-798edee4a267",
+            name: "Carlos",
+            email: "carlos.test@gmail.com",
+            phoneNumber: "84878116",
+        }
+    },
+    {
+        id: "24066a9d-610a-4dce-91ed-0fab5ad88bfc",
+        salePrice: "CRC 3,500.00",
+        durationInMinutes: 45,
+        reservationDate: "Viernes 15 de noviembre",
+        reservationTime: "05:00 p.m.",
+        client: {
+            id: "e9248f50-f6bd-4325-94e9-798edee4a267",
+            name: "",
+            email: "",
+            phoneNumber: "",
         }
     },
 ];
