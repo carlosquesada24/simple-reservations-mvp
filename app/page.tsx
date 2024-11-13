@@ -11,10 +11,6 @@ export default function Home() {
       <hr />
 
       <ReservationsList reservationsList={reservationsList} />
-
-      <br />
-      <br />
-      <br />
     </main>
   );
 }
