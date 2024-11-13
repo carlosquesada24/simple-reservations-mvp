@@ -13,6 +13,7 @@ const ReservationsList = ({ reservationsList = [] }: ReservationsListProps) => {
 
   return (
     <div className="flow-root">
+      <h2>Tus reservas</h2>
       {isEmptyArray ? (
         <div className="justify-content-center flex flex-col items-center">
           <p className="text-center">¡No hay reservas!</p>
