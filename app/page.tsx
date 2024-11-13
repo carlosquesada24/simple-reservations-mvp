@@ -2,9 +2,10 @@
 
 import { useEffect } from "react";
 import { DarkThemeToggle } from "flowbite-react";
-import ReservationsList from "./(modules)/(show-all-reservations)/(components)/ReservationsList/ReservationsList";
-import { reservationsList } from "./(data)/(reservations)";
+
 import supabase from "./(utils)/supabase";
+import { barberReservationsList } from "./(data)/(reservations)";
+import ReservationsList from "./(modules)/(reservations)/(reservation-display)/(show-all-reservations)/(components)/ReservationsList/ReservationsList";
 
 export default function Home() {
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function Home() {
       <DarkThemeToggle />
       <hr />
 
-      <ReservationsList reservationsList={reservationsList} />
+      <ReservationsList reservationsList={barberReservationsList} />
     </main>
   );
 }
