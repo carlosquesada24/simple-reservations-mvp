@@ -9,7 +9,6 @@ interface ReservationCardProps {
 const ReservationCardClientView = ({ reservation }: ReservationCardProps) => {
   return (
     <div className="flex items-center space-x-4">
-      <h2>is client</h2>
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
           {reservation.reservationDate}
@@ -84,7 +83,7 @@ const ReservationCardBarberView = ({ reservation }: ReservationCardProps) => {
 };
 
 const ReservationCard = ({ reservation }: ReservationCardProps) => {
-  const isBarberUser = true;
+  const isBarberUser = false;
   const isClientUser = !isBarberUser;
 
   return isBarberUser ? (
