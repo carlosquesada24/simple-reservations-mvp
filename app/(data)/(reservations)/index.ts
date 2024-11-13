@@ -14,6 +14,12 @@ export interface Reservation {
     durationInMinutes: number;
     reservationDate: string;
     reservationTime: string;
+    client: {
+        id: string;
+        name: string;
+        email: string;
+        phoneNumber: string;
+    }
 }
 
 export const reservationsList: Reservation[] = [
@@ -23,6 +29,12 @@ export const reservationsList: Reservation[] = [
         durationInMinutes: 45,
         reservationDate: "Viernes 15 de noviembre",
         reservationTime: "10:00 a.m.",
+        client: {
+            id: "e9248f50-f6bd-4325-94e9-798edee4a267",
+            name: "Carlos",
+            email: "carlos.test@gmail.com",
+            phoneNumber: "84878116",
+        }
     },
     {
         id: "24066a9d-610a-4dce-91ed-0fab5ad88bfc",
@@ -30,5 +42,11 @@ export const reservationsList: Reservation[] = [
         durationInMinutes: 45,
         reservationDate: "Lunes 14 de octubre",
         reservationTime: "04:00 p.m.",
+        client: {
+            id: "e9248f50-f6bd-4325-94e9-798edee4a267",
+            name: "Carlos",
+            email: "carlos.test@gmail.com",
+            phoneNumber: "84878116",
+        }
     },
 ];
