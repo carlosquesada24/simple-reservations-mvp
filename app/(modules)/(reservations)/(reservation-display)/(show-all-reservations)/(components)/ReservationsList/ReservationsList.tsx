@@ -11,6 +11,9 @@ const ReservationsList = ({ reservationsList = [] }: ReservationsListProps) => {
   const isValidArray = reservationsList && Array.isArray(reservationsList);
   const isEmptyArray = isValidArray && reservationsList.length === 0;
 
+  const isBarberUser = true;
+  const isClientUser = !isBarberUser;
+
   return (
     <div className="flow-root">
       <h2>Tus reservas</h2>
@@ -23,12 +26,7 @@ const ReservationsList = ({ reservationsList = [] }: ReservationsListProps) => {
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {reservationsList.map((reservation) => (
             <li key={reservation.id} className="py-3 sm:py-4">
-              <ReservationCard
-                salePrice={reservation.salePrice}
-                durationInMinutes={reservation.durationInMinutes}
-                reservationDate={reservation.reservationDate}
-                reservationTime={reservation.reservationTime}
-              />
+              <ReservationCard reservation={reservation} />
             </li>
           ))}
         </ul>
