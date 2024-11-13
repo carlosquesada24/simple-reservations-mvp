@@ -1,36 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
 import { DarkThemeToggle } from "flowbite-react";
 
-import supabase from "./(utils)/supabase";
-import { barberReservationsList } from "./(data)/(reservations)";
+import { clientReservationsList } from "./(data)/(reservations)";
 import ReservationsList from "./(modules)/(reservations)/(reservation-display)/(show-all-reservations)/(components)/ReservationsList/ReservationsList";
+import { useReservations } from "./(hooks)/useReservations";
 
 export default function Home() {
-  useEffect(() => {
-    const getAllReservations = async (): Promise<any[]> => {
-      const { data, error } = await supabase.from("Users").select(`
-        id,
-        created_at,
-        UsersTypes (name),
-        name
-        `);
-
-      if (error) {
-        console.log({ error });
-      }
-
-      return data as any[];
-    };
-
-    const handleFetchAllReservations = async () => {
-      const fetchedReservationsList = await getAllReservations();
-      console.log({ fetchedReservationsList });
-    };
-
-    handleFetchAllReservations();
-  }, []);
+  const { reservationsList } = useReservations();
 
   return (
     <main className="">
@@ -38,7 +15,7 @@ export default function Home() {
       <DarkThemeToggle />
       <hr />
 
-      <ReservationsList reservationsList={barberReservationsList} />
+      <ReservationsList reservationsList={clientReservationsList} />
     </main>
   );
 }
