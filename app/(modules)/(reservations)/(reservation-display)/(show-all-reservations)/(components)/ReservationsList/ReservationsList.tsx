@@ -1,5 +1,5 @@
 import React from "react";
-import ReservationCard from "@/app/(components)/ReservationCard/ReservationCard";
+import ReservationCard from "@/app/(modules)/(reservations)/(reservation-display)/(show-all-reservations)/(components)/ReservationCard/ReservationCard";
 import { Reservation } from "@/app/(data)/(reservations)";
 import { Button } from "flowbite-react";
 
