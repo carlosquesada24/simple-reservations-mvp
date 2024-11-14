@@ -28,8 +28,11 @@ export const useReservations = () => {
 
   useEffect(() => {
     const handleFetchAllReservations = async () => {
-      const fetchedReservationsList =
-        await reservationsRepository.getAllReservations<GetReservationSupabaseResponse>();
+      const fetchedReservationsList = reservationsApp.isBarberUser
+        ? await reservationsRepository.getAllReservations<GetReservationSupabaseResponse>()
+        : await reservationsRepository.getAllReservationsByClientId<GetReservationSupabaseResponse>(
+            reservationsApp.userId,
+          );
 
       const formattedReservations = fetchedReservationsList.map(
         (supabaseReservation) =>
