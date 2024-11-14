@@ -8,7 +8,7 @@ export const availabilityByReservationDate: AvailabilityByReservationDate = {
     '2024-11-14': ['10:00', '11:00', '13:00'],
 };
 
-export interface ReservationSupabaseRequest {
+export interface GetReservationSupabaseResponse {
     id: string;
     created_at: string;
     reservationDate: string;
@@ -23,6 +23,18 @@ export interface ReservationSupabaseRequest {
         email: string;
         phoneNumber: string;
     }
+}
+
+export interface SaveReservationSupabaseRequestInput {
+    id: string;
+    created_at: string;
+    reservationDate: string;
+    reservationDateTime: string;
+    reservationTime: string;
+    totalSlotDurationInMinutes: number;
+    serviceDurationInMinutes: number;
+    salePrice: number;
+    clientId: string;
 }
 
 export interface Reservation {
