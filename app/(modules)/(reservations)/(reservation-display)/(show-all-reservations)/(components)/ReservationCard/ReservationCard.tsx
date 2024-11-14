@@ -1,4 +1,8 @@
 import { Reservation } from "@/app/(data)/(reservations)";
+import {
+  formatDateToSpanishReadable,
+  formatTimeToSpanish12HourCR,
+} from "@/app/(helpers)/date";
 import { Avatar } from "flowbite-react";
 import React from "react";
 
@@ -11,7 +15,7 @@ const ReservationCardClientView = ({ reservation }: ReservationCardProps) => {
     <div className="flex items-center space-x-4">
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-          {reservation.reservationDate}
+          {formatDateToSpanishReadable(reservation.reservationDateTime)}
         </p>
         <p className="truncate text-sm text-gray-500 dark:text-gray-400">
           {reservation.salePrice}
@@ -19,10 +23,10 @@ const ReservationCardClientView = ({ reservation }: ReservationCardProps) => {
       </div>
       <div className="flex-2 min-w-0">
         <p className="truncate text-sm font-semibold text-gray-900 dark:text-white">
-          {reservation.reservationTime}
+          {formatTimeToSpanish12HourCR(reservation.reservationDateTime)}
         </p>
         <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-          {reservation.durationInMinutes} min
+          {reservation.serviceDurationInMinutes} min
         </p>
       </div>
     </div>
@@ -71,10 +75,10 @@ const ReservationCardBarberView = ({ reservation }: ReservationCardProps) => {
         </div>
         <div className="flex-2 min-w-0">
           <p className="truncate text-sm font-semibold text-gray-900 dark:text-white">
-            {reservation.reservationTime}
+            {formatTimeToSpanish12HourCR(reservation.reservationDateTime)}
           </p>
           <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-            {reservation.durationInMinutes} min
+            {reservation.totalSlotDurationInMinutes} min
           </p>
         </div>
       </div>
@@ -83,7 +87,7 @@ const ReservationCardBarberView = ({ reservation }: ReservationCardProps) => {
 };
 
 const ReservationCard = ({ reservation }: ReservationCardProps) => {
-  const isBarberUser = true;
+  const isBarberUser = false;
   const isClientUser = !isBarberUser;
 
   return isBarberUser ? (

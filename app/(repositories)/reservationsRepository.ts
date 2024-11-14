@@ -24,6 +24,26 @@ const getAllReservations = async <T>(): Promise<SupabaseRecord<T>[]> => {
     return data ?? [];
 };
 
+const getAllReservationsByClientId = async <T>(clientId: string): Promise<SupabaseRecord<T>[]> => {
+    const { data, error } = await supabase.from("Reservations").select(`
+        id,
+        created_at,
+        totalSlotDurationInMinutes,
+        serviceDurationInMinutes,
+        reservationDate,
+        reservationDateTime,
+        reservationTime,
+        salePrice,
+        Users (id, name, email, phoneNumber)
+        `).eq("clientId", clientId);
+
+    if (error) {
+        console.log({ error });
+    }
+
+    return data ?? [];
+}
+
 const saveReservation = async <T>(reservation: T, client: any): Promise<SupabaseRecord<T>> => {
     const userExists = await usersRepository.getUserById(client.id);
 
@@ -61,6 +81,7 @@ const deleteReservation = async (reservationId: string) => {
 
 export default {
     getAllReservations,
+    getAllReservationsByClientId,
     saveReservation,
     deleteReservation,
 };
