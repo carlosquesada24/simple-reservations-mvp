@@ -1,5 +1,6 @@
 import supabase from "@/app/(utils)/supabase";
 import usersRepository from "./usersRepository";
+import { USER_TYPES_IDS } from "../(data)/(reservations)";
 
 type SupabaseRecord<T> = T & { id: string };
 
@@ -29,7 +30,7 @@ const saveReservation = async <T>(reservation: T, client: any): Promise<Supabase
     if (!userExists) {
         const userToSave = {
             id: client.id,
-            userTypeId: "45b57400-c54d-4aec-8e76-720113cdc387", // client
+            userTypeId: USER_TYPES_IDS.CLIENT, // client
             name: client.name,
             email: client.email,
             phoneNumber: client.phoneNumber,

@@ -1,3 +1,8 @@
+export const USER_TYPES_IDS = {
+    CLIENT: "45b57400-c54d-4aec-8e76-720113cdc387",
+    BARBER: "230fe623-4bde-48b5-9b1e-2c372b41ca8b",
+}
+
 interface AvailabilityByReservationDate {
     [key: string]: string[];
 }
@@ -6,6 +11,8 @@ export const availabilityByReservationDate: AvailabilityByReservationDate = {
     '2024-11-12': ['13:30'],
     '2024-11-13': ['09:00', '10:00', '11:00', '12:00'],
     '2024-11-14': ['10:00', '11:00', '13:00'],
+    '2024-11-15': ['10:00', '11:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+    '2024-11-16': ['10:00', '11:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
 };
 
 export interface GetReservationSupabaseResponse {
