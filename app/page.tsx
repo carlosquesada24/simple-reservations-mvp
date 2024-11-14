@@ -1,8 +1,6 @@
 "use client";
 
 import { DarkThemeToggle } from "flowbite-react";
-
-import { clientReservationsList } from "./(data)/(reservations)";
 import ReservationsList from "./(modules)/(reservations)/(reservation-display)/(show-all-reservations)/(components)/ReservationsList/ReservationsList";
 import { useReservations } from "./(hooks)/useReservations";
 
@@ -15,7 +13,7 @@ export default function Home() {
       <DarkThemeToggle />
       <hr />
 
-      <ReservationsList reservationsList={clientReservationsList} />
+      <ReservationsList reservationsList={reservationsList} />
     </main>
   );
 }
