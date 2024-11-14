@@ -10,6 +10,7 @@ import { useForm } from "@/app/(hooks)/useForm";
 
 import { availabilityByReservationDate } from "@/app/(data)/(reservations)";
 import { convertToDateString, getTodaysDate } from "@/app/(helpers)/date";
+import { useReservations } from "@/app/(hooks)/useReservations";
 
 interface ReservationFormValues {
   reservationDate: string;
@@ -34,6 +35,8 @@ const RESERVATION_FORM_STEPS = {
 };
 
 export default function ReservationPage() {
+  const { saveReservation } = useReservations();
+
   const {
     values: formValues,
     errors,
@@ -98,7 +101,9 @@ export default function ReservationPage() {
           <Button onClick={advanceToNextFormStep}>Siguiente</Button>
         )}
 
-        {currentFormStep === lastFormStep && <Button>Reservar</Button>}
+        {currentFormStep === lastFormStep && (
+          <Button onClick={saveReservation}>Reservar</Button>
+        )}
       </form>
 
       {/* STEPPER */}
