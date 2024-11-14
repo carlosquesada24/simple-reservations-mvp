@@ -14,16 +14,20 @@ npm run dev
 
 # Features working
 
-## Create reservations ⌚
+## Create simple reservations ✅
 
-- Reservation Form basic UI structure ✅
-- Reservation Form Logic ✅
-- Reservation Form UI ⌚
+Client can create a simple reservation. He will select
 
-[Create reservations (1, 2)](<../../../../Desktop/Reservations MVP - Reservation form logic flow working.webm>)
+- Date
+- Hour
+- Type his contact information (optional)
 
-Branches updated locally and remotely
+## Show all reservations (client) ✅
 
-## Show all reservations (barber) ⌚
+Client can see all the reservations that he has created
 
-## Show all reservations (client) ⌚
+⚠️ The data is associated to a clientId stored in LocalStorage. If Browser data is deleted, all the user information can't be populated with the data that is stored in Supabase ⚠️
+
+## Show all reservations (barber) ✅
+
+Barber can see all the reservations
