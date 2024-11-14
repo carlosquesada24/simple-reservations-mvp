@@ -1,9 +1,8 @@
 import supabase from "@/app/(utils)/supabase";
-import { Reservation } from "../(data)/(reservations)";
 
 type SupabaseRecord<T> = T & { id: string };
 
-const getAllReservations = async <T>(): Promise<SupabaseRecord<Reservation>[]> => {
+const getAllReservations = async <T>(): Promise<SupabaseRecord<T>[]> => {
     const { data, error } = await supabase.from("Reservations").select(`
         id,
         created_at,
@@ -13,14 +12,14 @@ const getAllReservations = async <T>(): Promise<SupabaseRecord<Reservation>[]> =
         reservationDateTime,
         reservationTime,
         salePrice,
-        Users (name, email, phoneNumber)
+        Users (id, name, email, phoneNumber)
         `);
 
     if (error) {
         console.log({ error });
     }
 
-    return (data as SupabaseRecord<Reservation>[]) || [];
+    return data ?? [];
 };
 
 const saveReservation = async <T>(reservation: T): Promise<SupabaseRecord<T>> => {
