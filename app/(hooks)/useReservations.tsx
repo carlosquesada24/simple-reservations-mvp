@@ -4,10 +4,13 @@ import React, { useEffect, useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 import {
   Reservation,
-  ReservationSupabaseRequest,
+  GetReservationSupabaseResponse,
 } from "../(data)/(reservations)";
 import reservationsRepository from "../(repositories)/reservationsRepository";
-import { supabaseToReservationMapper } from "../(mappers)/reservations";
+import {
+  reservationFormValuesToSupabaseMapper,
+  supabaseToReservationMapper,
+} from "../(mappers)/reservations";
 
 const RESERVATIONS_APP_EMPTY_STATE = {
   userId: crypto.randomUUID(),
@@ -26,7 +29,7 @@ export const useReservations = () => {
   useEffect(() => {
     const handleFetchAllReservations = async () => {
       const fetchedReservationsList =
-        await reservationsRepository.getAllReservations<ReservationSupabaseRequest>();
+        await reservationsRepository.getAllReservations<GetReservationSupabaseResponse>();
 
       const formattedReservations = fetchedReservationsList.map(
         (supabaseReservation) =>
@@ -40,27 +43,42 @@ export const useReservations = () => {
   }, []);
 
   const saveReservation = async (formValues: any) => {
-    alert("Reservation created");
+    await saveReservationOnSupabase(formValues);
 
-    const reservationToSaveOnSupabase = {
-      ...formValues,
-      id: crypto.randomUUID(),
-    };
+    // const reservationToSaveOnSupabase = {
+    //   ...formValues,
+    //   id: crypto.randomUUID(),
+    // };
 
-    const savedReservation = await saveReservationOnSupabase(
-      reservationToSaveOnSupabase,
-    );
-    saveReservationOnLocalStorage(
-      savedReservation ?? reservationToSaveOnSupabase,
-    );
-    setReservationsList([
-      ...reservationsList,
-      savedReservation ?? reservationToSaveOnSupabase,
-    ]);
+    // const savedReservation = await saveReservationOnSupabase();
+    // saveReservationOnLocalStorage(
+    //   savedReservation ?? reservationToSaveOnSupabase,
+    // );
+    // setReservationsList([
+    //   ...reservationsList,
+    //   savedReservation ?? reservationToSaveOnSupabase,
+    // ]);
   };
 
-  const saveReservationOnSupabase = async (reservation: Reservation) => {
-    // return await reservationsSupabaseRepository.saveReservation(reservation);
+  const saveReservationOnSupabase = async (formValues: any) => {
+    const clientId = reservationsApp.userId;
+
+    const reservationToSave = reservationFormValuesToSupabaseMapper(
+      formValues,
+      clientId,
+    );
+
+    const clientToSave = {
+      id: clientId,
+      name: formValues.name,
+      email: formValues.email,
+      phoneNumber: formValues.phoneNumber,
+    };
+
+    return await reservationsRepository.saveReservation(
+      reservationToSave,
+      clientToSave,
+    );
   };
 
   const saveReservationOnLocalStorage = (reservationToSave: Reservation) => {

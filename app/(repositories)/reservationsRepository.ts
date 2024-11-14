@@ -1,4 +1,6 @@
 import supabase from "@/app/(utils)/supabase";
+import usersRepository from "./usersRepository";
+import { USER_TYPES_IDS } from "../(data)/(reservations)";
 
 type SupabaseRecord<T> = T & { id: string };
 
@@ -22,15 +24,29 @@ const getAllReservations = async <T>(): Promise<SupabaseRecord<T>[]> => {
     return data ?? [];
 };
 
-const saveReservation = async <T>(reservation: T): Promise<SupabaseRecord<T>> => {
-    const result = await supabase.from("Reservations").upsert(reservation).select();
+const saveReservation = async <T>(reservation: T, client: any): Promise<SupabaseRecord<T>> => {
+    const userExists = await usersRepository.getUserById(client.id);
 
-    if (result.error) {
-        console.log(result.error);
+    if (!userExists) {
+        const userToSave = {
+            id: client.id,
+            userTypeId: USER_TYPES_IDS.CLIENT, // client
+            name: client.name,
+            email: client.email,
+            phoneNumber: client.phoneNumber,
+        }
+
+        await usersRepository.saveUser(userToSave);
     }
 
-    const isResultValid = result.data && Array.isArray(result.data);
-    const reservationInserted = isResultValid ? result.data[0] : null;
+    const resultReservationCreated = await supabase.from("Reservations").insert(reservation).select();
+
+    if (resultReservationCreated.error) {
+        console.log(resultReservationCreated.error);
+    }
+
+    const isResultValid = resultReservationCreated.data && Array.isArray(resultReservationCreated.data);
+    const reservationInserted = isResultValid ? resultReservationCreated.data[0] : null;
 
     return reservationInserted as SupabaseRecord<T>;
 };

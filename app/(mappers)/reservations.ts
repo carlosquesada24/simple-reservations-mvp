@@ -1,6 +1,6 @@
-import { Reservation, ReservationSupabaseRequest } from "../(data)/(reservations)";
+import { Reservation, GetReservationSupabaseResponse, SaveReservationSupabaseRequestInput } from "../(data)/(reservations)";
 
-export const supabaseToReservationMapper = (supabaseReservation: ReservationSupabaseRequest): Reservation => {
+export const supabaseToReservationMapper = (supabaseReservation: GetReservationSupabaseResponse): Reservation => {
     console.log({ supabaseReservation })
 
     return {
@@ -15,5 +15,21 @@ export const supabaseToReservationMapper = (supabaseReservation: ReservationSupa
             email: supabaseReservation.Users.email,
             phoneNumber: supabaseReservation.Users.phoneNumber,
         }
+    }
+}
+
+export const reservationFormValuesToSupabaseMapper = (formValues: any, clientId: string): SaveReservationSupabaseRequestInput => {
+    return {
+        id: crypto.randomUUID(),
+        created_at: new Date().toISOString(),
+        reservationDate: formValues.reservationDate,
+        reservationDateTime: new Date(
+            `${formValues.reservationDate} ${formValues.reservationTime}`,
+        ).toISOString(),
+        reservationTime: formValues.reservationTime,
+        totalSlotDurationInMinutes: 60,
+        serviceDurationInMinutes: 45,
+        salePrice: 4000,
+        clientId
     }
 }
