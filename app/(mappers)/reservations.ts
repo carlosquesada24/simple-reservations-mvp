@@ -5,10 +5,10 @@ export const supabaseToReservationMapper = (supabaseReservation: ReservationSupa
 
     return {
         id: supabaseReservation.id,
-        salePrice: `CRC ${supabaseReservation.salePrice}`,
-        estimatedServiceDurationTimeForBarberInMinutes: supabaseReservation.estimatedServiceDurationTimeForBarberInMinutes,
         reservationDateTime: supabaseReservation.reservationDateTime,
-        estimatedServiceDurationTimeForClientInMinutes: supabaseReservation.estimatedServiceDurationTimeForClientInMinutes,
+        serviceDurationInMinutes: supabaseReservation.serviceDurationInMinutes,
+        totalSlotDurationInMinutes: supabaseReservation.totalSlotDurationInMinutes,
+        salePrice: `CRC ${supabaseReservation.salePrice}`,
         client: {
             id: supabaseReservation.Users.id,
             name: supabaseReservation.Users.name,

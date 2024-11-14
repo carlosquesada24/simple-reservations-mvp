@@ -6,8 +6,8 @@ const getAllReservations = async <T>(): Promise<SupabaseRecord<T>[]> => {
     const { data, error } = await supabase.from("Reservations").select(`
         id,
         created_at,
-        estimatedServiceDurationTimeForBarberInMinutes,
-        estimatedServiceDurationTimeForClientInMinutes,
+        totalSlotDurationInMinutes,
+        serviceDurationInMinutes,
         reservationDate,
         reservationDateTime,
         reservationTime,

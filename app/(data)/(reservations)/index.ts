@@ -11,13 +11,14 @@ export const availabilityByReservationDate: AvailabilityByReservationDate = {
 export interface ReservationSupabaseRequest {
     id: string;
     created_at: string;
-    estimatedServiceDurationTimeForBarberInMinutes: number;
-    estimatedServiceDurationTimeForClientInMinutes: number;
     reservationDate: string;
     reservationDateTime: string;
     reservationTime: string;
+    totalSlotDurationInMinutes: number;
+    serviceDurationInMinutes: number;
     salePrice: number;
     Users: {
+        id: string
         name: string;
         email: string;
         phoneNumber: string;
@@ -27,9 +28,9 @@ export interface ReservationSupabaseRequest {
 export interface Reservation {
     id: string;
     salePrice: string;
-    durationInMinutes: number;
+    totalSlotDurationInMinutes: number;
     reservationDateTime: string; // day date month
-    estimatedServiceDurationTimeForClientInMinutes: number;
+    serviceDurationInMinutes: number;
     client: {
         id: string;
         name: string;
@@ -40,11 +41,12 @@ export interface Reservation {
 
 export const clientReservationsList: Reservation[] = [
     {
+
         id: "51f03f51-0af6-49bf-af0c-bdf356d56664",
         salePrice: "CRC 3,500.00",
-        durationInMinutes: 45,
-        reservationDate: "Viernes 15 de noviembre",
-        reservationTime: "10:00 a.m.",
+        serviceDurationInMinutes: 45,
+        reservationDateTime: "Viernes 15 de noviembre",
+        totalSlotDurationInMinutes: 60,
         client: {
             id: "e9248f50-f6bd-4325-94e9-798edee4a267",
             name: "Carlos",
@@ -53,11 +55,11 @@ export const clientReservationsList: Reservation[] = [
         }
     },
     {
-        id: "24066a9d-610a-4dce-91ed-0fab5ad88bfc",
+        id: "51f03f51-0af6-49bf-af0c-bdf356d56664",
         salePrice: "CRC 3,500.00",
-        durationInMinutes: 45,
-        reservationDate: "Lunes 14 de octubre",
-        reservationTime: "04:00 p.m.",
+        serviceDurationInMinutes: 45,
+        reservationDateTime: "Lunes 14 de noviembre",
+        totalSlotDurationInMinutes: 60,
         client: {
             id: "e9248f50-f6bd-4325-94e9-798edee4a267",
             name: "Carlos",
@@ -72,9 +74,9 @@ export const barberReservationsList: Reservation[] = [
     {
         id: "51f03f51-0af6-49bf-af0c-bdf356d56664",
         salePrice: "CRC 3,500.00",
-        durationInMinutes: 45,
-        reservationDate: "Viernes 15 de noviembre",
-        reservationTime: "10:00 a.m.",
+        serviceDurationInMinutes: 45,
+        reservationDateTime: "Lunes 14 de noviembre",
+        totalSlotDurationInMinutes: 60,
         client: {
             id: "e9248f50-f6bd-4325-94e9-798edee4a267",
             name: "Carlos",
@@ -83,13 +85,13 @@ export const barberReservationsList: Reservation[] = [
         }
     },
     {
-        id: "24066a9d-610a-4dce-91ed-0fab5ad88bfc",
+        id: "51f03f51-0af6-49bf-af0c-bdf356d56664",
         salePrice: "CRC 3,500.00",
-        durationInMinutes: 45,
-        reservationDate: "Viernes 15 de noviembre",
-        reservationTime: "05:00 p.m.",
+        serviceDurationInMinutes: 45,
+        reservationDateTime: "Lunes 14 de noviembre",
+        totalSlotDurationInMinutes: 60,
         client: {
-            id: "e9248f50-f6bd-4325-94e9-798edee4a267",
+            id: "e9348f50-f6bd-4325-94e9-798edee4a267",
             name: "",
             email: "",
             phoneNumber: "",
