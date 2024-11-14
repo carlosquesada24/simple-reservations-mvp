@@ -56,6 +56,10 @@ export default function ReservationPage() {
   const availableHoursList: string[] =
     availabilityByReservationDate[formValues.reservationDate];
 
+  const handleSaveReservation = () => {
+    saveReservation(formValues);
+  };
+
   return (
     <main className="">
       <h1 className="text-2xl dark:text-white">Página de reservación</h1>
@@ -102,7 +106,7 @@ export default function ReservationPage() {
         )}
 
         {currentFormStep === lastFormStep && (
-          <Button onClick={saveReservation}>Reservar</Button>
+          <Button onClick={handleSaveReservation}>Reservar</Button>
         )}
       </form>
 
