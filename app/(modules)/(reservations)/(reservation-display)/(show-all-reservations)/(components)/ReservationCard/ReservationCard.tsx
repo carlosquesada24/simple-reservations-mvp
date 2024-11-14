@@ -75,10 +75,10 @@ const ReservationCardBarberView = ({ reservation }: ReservationCardProps) => {
         </div>
         <div className="flex-2 min-w-0">
           <p className="truncate text-sm font-semibold text-gray-900 dark:text-white">
-            {reservation.reservationTime}
+            {formatTimeToSpanish12HourCR(reservation.reservationDateTime)}
           </p>
           <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-            {reservation.durationInMinutes} min
+            {reservation.totalSlotDurationInMinutes} min
           </p>
         </div>
       </div>
