@@ -68,9 +68,16 @@ export const useReservations = () => {
       clientId,
     );
 
+    const clientToSave = {
+      id: clientId,
+      name: formValues.name,
+      email: formValues.email,
+      phoneNumber: formValues.phoneNumber,
+    };
+
     return await reservationsRepository.saveReservation(
       reservationToSave,
-      clientId,
+      clientToSave,
     );
   };
 

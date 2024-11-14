@@ -23,16 +23,16 @@ const getAllReservations = async <T>(): Promise<SupabaseRecord<T>[]> => {
     return data ?? [];
 };
 
-const saveReservation = async <T>(reservation: T, clientId: string): Promise<SupabaseRecord<T>> => {
-    const userExists = await usersRepository.getUserById(clientId);
+const saveReservation = async <T>(reservation: T, client: any): Promise<SupabaseRecord<T>> => {
+    const userExists = await usersRepository.getUserById(client.id);
 
     if (!userExists) {
         const userToSave = {
-            id: clientId,
+            id: client.id,
             userTypeId: "45b57400-c54d-4aec-8e76-720113cdc387", // client
-            name: "",
-            email: "",
-            phoneNumber: "",
+            name: client.name,
+            email: client.email,
+            phoneNumber: client.phoneNumber,
         }
 
         await usersRepository.saveUser(userToSave);
