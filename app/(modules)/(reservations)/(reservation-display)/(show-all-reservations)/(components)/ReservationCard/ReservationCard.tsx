@@ -3,6 +3,7 @@ import {
   formatDateToSpanishReadable,
   formatTimeToSpanish12HourCR,
 } from "@/app/(helpers)/date";
+import { useReservations } from "@/app/(hooks)/useReservations";
 import { Avatar } from "flowbite-react";
 import React from "react";
 
@@ -35,7 +36,8 @@ const ReservationCardClientView = ({ reservation }: ReservationCardProps) => {
 
 const ReservationCardBarberView = ({ reservation }: ReservationCardProps) => {
   const isAnonymous =
-    reservation.client && reservation.client.name.length === 0;
+    (reservation?.client && reservation?.client?.name?.length === 0) ||
+    reservation?.client?.name === null;
 
   return isAnonymous ? (
     <div className="flex items-center space-x-4">
@@ -47,15 +49,15 @@ const ReservationCardBarberView = ({ reservation }: ReservationCardProps) => {
           Anónimo
         </p>
         <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-          Sin registrar
+          {reservation?.client?.email ?? "Sin registrar"}
         </p>
       </div>
       <div className="flex-2 min-w-0">
         <p className="truncate text-sm font-semibold text-gray-900 dark:text-white">
-          11:00 a.m.
+          {formatTimeToSpanish12HourCR(reservation.reservationDateTime)}
         </p>
         <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-          1 hora
+          {reservation.totalSlotDurationInMinutes} min
         </p>
       </div>
     </div>
@@ -87,8 +89,7 @@ const ReservationCardBarberView = ({ reservation }: ReservationCardProps) => {
 };
 
 const ReservationCard = ({ reservation }: ReservationCardProps) => {
-  const isBarberUser = false;
-  const isClientUser = !isBarberUser;
+  const { isBarberUser } = useReservations();
 
   return isBarberUser ? (
     <ReservationCardBarberView reservation={reservation} />

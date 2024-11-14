@@ -103,6 +103,7 @@ export const useReservations = () => {
 
   return {
     reservationsList,
+    isBarberUser: reservationsApp.isBarberUser,
     saveReservation,
     deleteReservation,
   };
