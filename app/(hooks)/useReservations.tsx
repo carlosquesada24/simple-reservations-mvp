@@ -2,29 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import useLocalStorage from "./useLocalStorage";
-import supabase from "../(utils)/supabase";
-import { Reservation } from "../(data)/(reservations)";
+import {
+  Reservation,
+  ReservationSupabaseRequest,
+} from "../(data)/(reservations)";
+import reservationsRepository from "../(repositories)/reservationsRepository";
+import { supabaseToReservationMapper } from "../(mappers)/reservations";
 
 const RESERVATIONS_APP_EMPTY_STATE = {
   userId: crypto.randomUUID(),
   isBarberUser: false,
-};
-
-const reservationsSupabaseRepository = {
-  getAllReservations: async () => {
-    const { data, error } = await supabase.from("Users").select(`
-          id,
-          created_at,
-          UsersTypes (name),
-          name
-          `);
-
-    if (error) {
-      console.log({ error });
-    }
-
-    return data as any[];
-  },
 };
 
 export const useReservations = () => {
@@ -39,8 +26,14 @@ export const useReservations = () => {
   useEffect(() => {
     const handleFetchAllReservations = async () => {
       const fetchedReservationsList =
-        await reservationsSupabaseRepository.getAllReservations();
-      setReservationsList(fetchedReservationsList);
+        await reservationsRepository.getAllReservations<ReservationSupabaseRequest>();
+
+      const formattedReservations = fetchedReservationsList.map(
+        (supabaseReservation) =>
+          supabaseToReservationMapper(supabaseReservation),
+      );
+
+      setReservationsList(formattedReservations);
     };
 
     handleFetchAllReservations();
