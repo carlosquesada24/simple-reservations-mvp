@@ -1,4 +1,5 @@
 import supabase from "@/app/(utils)/supabase";
+import usersRepository from "./usersRepository";
 
 type SupabaseRecord<T> = T & { id: string };
 
@@ -22,42 +23,29 @@ const getAllReservations = async <T>(): Promise<SupabaseRecord<T>[]> => {
     return data ?? [];
 };
 
-const saveReservation = async <T>(reservation: T): Promise<SupabaseRecord<T>> => {
-    alert('From repository');
+const saveReservation = async <T>(reservation: T, clientId: string): Promise<SupabaseRecord<T>> => {
+    const userExists = await usersRepository.getUserById(clientId);
 
-    // Creo el cliente
-    const result = await supabase.from("Users").insert({
-        id: crypto.randomUUID(), // localStorage.clientId
-        userTypeId: "45b57400-c54d-4aec-8e76-720113cdc387", // client
-        name: "",
-        email: "",
-        phoneNumber: "",
-    }).select();
+    if (!userExists) {
+        const userToSave = {
+            id: clientId,
+            userTypeId: "45b57400-c54d-4aec-8e76-720113cdc387", // client
+            name: "",
+            email: "",
+            phoneNumber: "",
+        }
 
-    // creo la reservation
-
-    const result2 = await supabase.from("Reservations").insert({
-        id: crypto.randomUUID(),
-        reservationDate: new Date().toISOString().split('T')[0],
-        reservationDateTime: new Date().toISOString(),
-        reservationTime: "14:00:00",
-        totalSlotDurationInMinutes: 60,
-        serviceDurationInMinutes: 45,
-        salePrice: 4000,
-        clientId: result?.data !== null ? result?.data[0]?.id : "",
-    }).select();
-    // // upsert
-
-    "generar uuid de reserva"
-
-    console.log({ result2 })
-
-    if (result.error) {
-        console.log(result.error);
+        await usersRepository.saveUser(userToSave);
     }
 
-    const isResultValid = result.data && Array.isArray(result.data);
-    const reservationInserted = isResultValid ? result.data[0] : null;
+    const resultReservationCreated = await supabase.from("Reservations").insert(reservation).select();
+
+    if (resultReservationCreated.error) {
+        console.log(resultReservationCreated.error);
+    }
+
+    const isResultValid = resultReservationCreated.data && Array.isArray(resultReservationCreated.data);
+    const reservationInserted = isResultValid ? resultReservationCreated.data[0] : null;
 
     return reservationInserted as SupabaseRecord<T>;
 };
