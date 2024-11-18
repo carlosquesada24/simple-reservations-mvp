@@ -3,16 +3,18 @@ import ReservationCard from "@/app/(modules)/(reservations)/(reservation-display
 import { Reservation } from "@/app/(data)/(reservations)";
 import { Button } from "flowbite-react";
 import { useRouter } from "next/navigation";
+import { useReservations } from "@/app/(hooks)/useReservations";
 
 interface ReservationsListProps {
   reservationsList: Reservation[];
 }
 
 const ReservationsList = ({ reservationsList = [] }: ReservationsListProps) => {
+  const { isBarberUser } = useReservations();
+
   const isValidArray = reservationsList && Array.isArray(reservationsList);
   const isEmptyArray = isValidArray && reservationsList.length === 0;
 
-  const isBarberUser = true;
   const isClientUser = !isBarberUser;
 
   const router = useRouter();
@@ -23,9 +25,11 @@ const ReservationsList = ({ reservationsList = [] }: ReservationsListProps) => {
     <div className="flow-root">
       <div className="justify-content-between flex w-[100%]">
         <h2>Tus reservas</h2>
-        <Button className="ml-auto" onClick={handleGoToReservationPage}>
-          Reservar
-        </Button>
+        {isClientUser && (
+          <Button className="ml-auto" onClick={handleGoToReservationPage}>
+            Reservar
+          </Button>
+        )}
       </div>
       {isEmptyArray ? (
         <div className="justify-content-center flex flex-col items-center">
