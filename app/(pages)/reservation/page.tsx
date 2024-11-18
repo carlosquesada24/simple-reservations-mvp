@@ -11,6 +11,7 @@ import { useForm } from "@/app/(hooks)/useForm";
 import { availabilityByReservationDate } from "@/app/(data)/(reservations)";
 import { convertToDateString, getTodaysDate } from "@/app/(helpers)/date";
 import { useReservations } from "@/app/(hooks)/useReservations";
+import { useRouter } from "next/navigation";
 
 interface ReservationFormValues {
   reservationDate: string;
@@ -37,13 +38,15 @@ const RESERVATION_FORM_STEPS = {
 export default function ReservationPage() {
   const { saveReservation } = useReservations();
 
+  const router = useRouter();
+
   const {
     values: formValues,
     errors,
     handleInputChange,
     validateField,
   } = useForm(reservationFormEmptyState, {});
-  console.log({ formValues });
+
   const { currentFormStep, advanceToNextFormStep, backToPreviousFormStep } =
     useFormSteps(
       RESERVATION_FORM_STEPS.DATE_SELECTION,
@@ -56,8 +59,11 @@ export default function ReservationPage() {
   const availableHoursList: string[] =
     availabilityByReservationDate[formValues.reservationDate];
 
+  const handleGoToHomePage = () => router.push("/");
+
   const handleSaveReservation = () => {
     saveReservation(formValues);
+    handleGoToHomePage();
   };
 
   return (
