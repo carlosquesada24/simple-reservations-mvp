@@ -24,7 +24,7 @@ const ReservationsList = ({ reservationsList = [] }: ReservationsListProps) => {
   return (
     <div className="flow-root">
       <div className="justify-content-between flex w-[100%]">
-        <h2>Tus reservas</h2>
+        <h2 className="text-3xl font-bold">Tus reservas</h2>
         {isClientUser && (
           <Button className="ml-auto" onClick={handleGoToReservationPage}>
             Reservar
